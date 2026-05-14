@@ -118,7 +118,8 @@ export class DatabaseService {
     try {
       return await this.poolConnection.getConnection();
     } catch (error) {
-      this.logger.error(`Failed to get database connection: ${error}`, error);
+      const message = error instanceof Error ? error.message : String(error);
+      this.logger.error(`Failed to get database connection: ${message}`, error);
       throw error;
     }
   }
